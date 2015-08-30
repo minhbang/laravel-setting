@@ -44,5 +44,5 @@
     </div>
 @stop
 @section('script')
-    @include('backend._form_show_script', ['form' => ['#form-editor-preview' => $settings["form"]]])
+    @include('_form_show_script', ['form' => ['#form-editor-preview' => $settings["form"]]])
 @stop

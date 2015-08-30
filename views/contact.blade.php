@@ -79,5 +79,5 @@
 @stop
 
 @section('script')
-    @include('backend._form_editor_script', ['input_forms' => 'orm-editor-preview'])
+    @include('_form_editor_script', ['input_forms' => 'form-editor-preview'])
 @stop
