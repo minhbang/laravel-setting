@@ -1,0 +1,39 @@
+{
+    "name": "minhbang/laravel-setting",
+    "description": "Laravel Setting Package",
+    "keywords": [
+        "minhbang",
+        "laravel",
+        "setting"
+    ],
+    "homepage": "https://github.com/minhbang/laravel-setting",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Minh Bang",
+            "email": "contact@minhbang.com",
+            "homepage": "http://minhbang.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "illuminate/support": "~5.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Minhbang\\LaravelSetting\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Minhbang\\LaravelSetting\\Test\\": "tests"
+        }
+    }
+}
