@@ -72,7 +72,7 @@
         <div class="form-group">
             <div class="col-md-6 col-md-offset-4">
                 <button type="submit" class="btn btn-success" style="margin-right: 15px;">{{ trans('common.save') }}</button>
-                <a href="{{ route('backend.setting') }}">{{ trans('common.cancel') }}</a>
+                <a href="{{ route('backend.setting.list') }}">{{ trans('common.cancel') }}</a>
             </div>
         </div>
         {!! Form::close() !!}

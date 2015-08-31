@@ -71,7 +71,7 @@
     <div class="ibox-content">
         <div class="form-group text-center">
                 <button type="submit" class="btn btn-success" style="margin-right: 15px;">{{ trans('common.save') }}</button>
-                <a href="{{ route('backend.setting') }}">{{ trans('common.cancel') }}</a>
+                <a href="{{ route('backend.setting.list') }}">{{ trans('common.cancel') }}</a>
         </div>
     </div>
 </div>
