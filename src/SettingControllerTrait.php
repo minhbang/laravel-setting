@@ -84,7 +84,7 @@ trait SettingControllerTrait
     {
         $sections = $this->lists;
         $this->buildHeading(
-            trans("setting.setting_title"),
+            trans('setting::common.title'),
             'wrench',
             trans('setting::common.setting')
         );
@@ -99,9 +99,9 @@ trait SettingControllerTrait
     {
         $this->checkSection($section);
         $settings = mb_array_merge($this->value_default[$section], setting("{$this->name}::$section"));
-        $section_title = trans("setting.{$section}");
+        $section_title = trans("setting::{$section}.{$section}");
         $this->buildHeading(
-            trans('setting::common.setting_section', ['section' => $section_title]),
+            trans('setting::common.section', ['section' => $section_title]),
             'wrench',
             [
                 route($this->list_route) => trans('setting::common.setting'),
@@ -125,9 +125,9 @@ trait SettingControllerTrait
     {
         $this->checkSection($section);
         $settings = mb_array_merge($this->value_default[$section], setting("{$this->name}::$section", []));
-        $section_title = trans("setting.{$section}");
+        $section_title = trans("setting::{$section}.{$section}");
         $this->buildHeading(
-            trans('setting::common.setting_section', ['section' => $section_title]),
+            trans('setting::common.section', ['section' => $section_title]),
             'wrench',
             [
                 route($this->list_route) => trans('setting::common.setting'),
