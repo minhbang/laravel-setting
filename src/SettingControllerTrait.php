@@ -73,7 +73,7 @@ trait SettingControllerTrait
     protected function checkSection($section)
     {
         if (!isset($this->value_default[$section])) {
-            abort(404, trans('setting.section_not_found'));
+            abort(404, trans('setting::common.section_not_found'));
         }
     }
 
@@ -86,7 +86,7 @@ trait SettingControllerTrait
         $this->buildHeading(
             trans("setting.setting_title"),
             'wrench',
-            trans('setting.setting')
+            trans('setting::common.setting')
         );
         return view("setting::list", compact('sections'));
     }
@@ -101,10 +101,10 @@ trait SettingControllerTrait
         $settings = mb_array_merge($this->value_default[$section], setting("{$this->name}::$section"));
         $section_title = trans("setting.{$section}");
         $this->buildHeading(
-            trans('setting.setting_section', ['section' => $section_title]),
+            trans('setting::common.setting_section', ['section' => $section_title]),
             'wrench',
             [
-                route($this->list_route) => trans('setting.setting'),
+                route($this->list_route) => trans('setting::common.setting'),
                 '#'                      => $section_title
             ]
         );
@@ -127,10 +127,10 @@ trait SettingControllerTrait
         $settings = mb_array_merge($this->value_default[$section], setting("{$this->name}::$section", []));
         $section_title = trans("setting.{$section}");
         $this->buildHeading(
-            trans('setting.setting_section', ['section' => $section_title]),
+            trans('setting::common.setting_section', ['section' => $section_title]),
             'wrench',
             [
-                route($this->list_route) => trans('setting.setting'),
+                route($this->list_route) => trans('setting::common.setting'),
                 '#'                      => $section_title
             ]
         );
@@ -190,7 +190,7 @@ trait SettingControllerTrait
         return response()->json(
             [
                 'type'    => 'success',
-                'content' => trans('setting.restore_default_success'),
+                'content' => trans('setting::common.restore_default_success'),
             ]
         );
     }
