@@ -5,7 +5,7 @@ return [
     | Thư mục lưu các file setting *.json
     |--------------------------------------------------------------------------
     |
-    | - Sẽ tạo mới không tồn tại
+    | - Sẽ tạo mới nếu không tồn tại
     | - Các file setting có sẽ được lưu <path>/<namespace>.json
     |
     */
@@ -64,11 +64,11 @@ return [
          */
         'defaults' => [
             'app'     => [
-                'name_short' => 'Hobirena',
-                'name_long'  => 'Hobirena Online Shop',
-                'email'      => 'info@hobirena.com',
-                'address'    => '',
-                'tel'        => '',
+                'name_short' => 'Laravel App',
+                'name_long'  => 'Laravel Application Boilerplate',
+                'email'      => 'info@domain.com',
+                'address'    => 'HCM, VN',
+                'tel'        => '0123.4567890',
             ],
             'display' => [
                 'image_width_max'     => 900,

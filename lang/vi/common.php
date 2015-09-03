@@ -4,6 +4,7 @@ return [
     'section'                     => 'Thiếp lập <span class="text-warning">:section</span>',
     'title'                       => 'Thiếp lập Hệ thống',
     'group'                       => 'Nhóm Thiếp lập',
+    'system'                      => 'Hệ thống',
     'default'                     => 'Mặc định',
     'restore_default'             => 'Khôi phục mặc định',
     'restore_default_description' => 'Khôi phục các thiết lập mặc định',
