@@ -38,8 +38,8 @@
             var url = $(this).attr('href');
             e.preventDefault();
             bootbox.confirm({
-                title: '<i class="fa fa-reply-all"></i> {{trans("setting.restore_default")}}',
-                message: '<h3 class="text-danger text-center">{{trans("setting.restore_default_confirm")}}</h3>',
+                title: '<i class="fa fa-reply-all"></i> {{trans("setting::common.restore_default")}}',
+                message: '<h3 class="text-danger text-center">{{trans("setting::common.restore_default_confirm")}}</h3>',
                 buttons: {
                     cancel: {
                         label: '{{trans('common.cancel')}}'
