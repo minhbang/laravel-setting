@@ -79,5 +79,5 @@
 @stop
 
 @section('script')
-    @include('_form_editor_script', ['input_forms' => 'form-editor-preview'])
+    @include('_form_editor_script', ['input_forms' => ['input-form' => 'form-editor-preview']])
 @stop
