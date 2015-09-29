@@ -33,7 +33,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Minhbang\\LaravelSetting\\Test\\": "tests"
+            "Minhbang\\LaravelSetting\\Test\\": "tests/"
         }
     }
 }
