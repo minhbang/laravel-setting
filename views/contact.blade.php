@@ -51,7 +51,7 @@
             <div class="ibox-content">
                 <div class="form-group{{ $errors->has('enable') ? ' has-error':'' }}">
                     {!! Form::label('enable', trans('setting::'.$section.'.fields.enable'), ['class' => 'control-label']) !!}<br>
-                        {!! Form::checkbox('enable', 1, null,['data-on-text'=>trans('common.yes'), 'data-off-text'=>trans('common.no')]) !!}
+                        {!! Form::checkbox('enable', 1, null,['class'=>'switch', 'data-on-text'=>trans('common.yes'), 'data-off-text'=>trans('common.no')]) !!}
                         @if($errors->has('enable'))
                             <p class="help-block">{{ $errors->first('enable') }}</p>
                         @endif

@@ -12,7 +12,7 @@
         <div class="form-group{{ $errors->has('minify_html') ? ' has-error':'' }}">
             {!! Form::label('minify_html', trans('setting::'.$section.'.fields.minify_html'), ['class' => 'col-md-4 control-label']) !!}
             <div class="col-md-8">
-                {!! Form::checkbox('minify_html', 1, null,['data-on-text'=>trans('common.yes'), 'data-off-text'=>trans('common.no')]) !!}
+                {!! Form::checkbox('minify_html', 1, null,['class'=>'switch', 'data-on-text'=>trans('common.yes'), 'data-off-text'=>trans('common.no')]) !!}
                 @if($errors->has('minify_html'))
                     <p class="help-block">{{ $errors->first('minify_html') }}</p>
                 @endif
