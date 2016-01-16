@@ -9,6 +9,13 @@
                 <h5>{{ trans('setting::'.$section.'.description') }}</h5>
             </div>
             <div class="ibox-content">
+                <div class="form-group{{ $errors->has("name_app") ? ' has-error':'' }}">
+                    {!! Form::label("name_app", trans('setting::'.$section.'.fields.name_app'), ['class' => "control-label"]) !!}
+                    {!! Form::text("name_app", null, ['class' => 'form-control']) !!}
+                    @if($errors->has("name_app"))
+                        <p class="help-block">{{ $errors->first("name_app") }}</p>
+                    @endif
+                </div>
                 <div class="form-group{{ $errors->has("name_long") ? ' has-error':'' }}">
                     {!! Form::label("name_long", trans('setting::'.$section.'.fields.name_long'), ['class' => "control-label"]) !!}
                     {!! Form::text("name_long", null, ['class' => 'form-control']) !!}

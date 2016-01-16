@@ -30,6 +30,7 @@ return [
          */
         'rules'    => [
             'app'     => [
+                'name_app'   => 'required|max:40',
                 'name_short' => 'required|max:40',
                 'name_long'  => 'required|max:128',
                 'email'      => 'required|email',
@@ -43,7 +44,7 @@ return [
                 'image_width_sm'      => 'required|integer',
                 'image_height_sm'     => 'required|integer',
                 'summary_limit'       => 'required|integer',
-                'category_page_limit' => 'required|integer'
+                'category_page_limit' => 'required|integer',
             ],
             'system'  => [
                 'public_files'   => 'required',
@@ -64,6 +65,7 @@ return [
          */
         'defaults' => [
             'app'     => [
+                'name_app'   => 'Laravel Portal',
                 'name_short' => 'Laravel App',
                 'name_long'  => 'Laravel Application Boilerplate',
                 'email'      => 'info@domain.com',
