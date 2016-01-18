@@ -25,7 +25,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Minhbang\\LaravelSetting\\": "src/"
+            "Minhbang\\Setting\\": "src/"
         },
         "files": [
             "src/helpers.php"
@@ -33,7 +33,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Minhbang\\LaravelSetting\\Test\\": "tests/"
+            "Minhbang\\Setting\\Test\\": "tests/"
         }
     }
 }

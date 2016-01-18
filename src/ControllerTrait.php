@@ -1,6 +1,6 @@
 <?php
 
-namespace Minhbang\LaravelSetting;
+namespace Minhbang\Setting;
 
 use App;
 use Session;
@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
  * @method void buildHeading($title, $icon, $breadcrumbs)
  * @method void validate(Request $request, array $rules, array $messages = [], array $customAttributes = [])
  */
-trait SettingControllerTrait
+trait ControllerTrait
 {
     protected $name;
     protected $list_route;

@@ -1,11 +1,11 @@
 <?php
 
-namespace Minhbang\LaravelSetting;
+namespace Minhbang\Setting;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 
-class SettingServiceProvider extends ServiceProvider
+class ServiceProvider extends BaseServiceProvider
 {
     /**
      * Perform post-registration booting of services.
@@ -43,7 +43,7 @@ class SettingServiceProvider extends ServiceProvider
         // add Setting alias
         $this->app->booting(
             function ($app) {
-                AliasLoader::getInstance()->alias('Setting', SettingFacade::class);
+                AliasLoader::getInstance()->alias('Setting', Facade::class);
             }
         );
     }

@@ -1,5 +1,5 @@
 <?php
-namespace Minhbang\LaravelSetting;
+namespace Minhbang\Setting;
 
 class Setting
 {
