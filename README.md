@@ -22,7 +22,7 @@ $ composer update
 
 * Thêm vào file config/app.php => 'providers'
 ```php
-	Minhbang\Setting\SettingServiceProvider::class,
+	Minhbang\Setting\ServiceProvider::class,
 ```
 
 * Publish config và views
