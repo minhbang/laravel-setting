@@ -2,7 +2,7 @@
 
 namespace Minhbang\Setting;
 
-use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Minhbang\Kit\Extensions\BaseServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 
 class ServiceProvider extends BaseServiceProvider
