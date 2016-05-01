@@ -1,4 +1,4 @@
-@extends('backend.layouts.main')
+@extends('backend.layouts.master')
 @section('content')
 {!! Form::model($settings) !!}
 <div class="row">

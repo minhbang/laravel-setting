@@ -59,8 +59,9 @@ trait ControllerTrait
      */
     protected function init()
     {
-        $this->lists = config("setting.{$this->name}.lists");
         $this->rules = config("setting.{$this->name}.rules");
+        $this->lists = array_keys($this->rules);
+        
         $this->value_default = $this->loadDefaults();
         $this->value_init = config("setting.{$this->name}.init");
     }

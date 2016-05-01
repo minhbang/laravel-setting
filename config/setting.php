@@ -9,7 +9,19 @@ return [
     | - Các file setting có sẽ được lưu <path>/<namespace>.json
     |
     */
-    'path' => storage_path('settings'),
+    'path'  => storage_path('settings'),
+
+    // Định nghĩa menus cho setting
+    'menus' => [
+        'backend.sidebar.setting.setting' => [
+            'priority' => 3,
+            'url'      => 'route:backend.setting.list',
+            'label'    => 'trans:setting::common.system',
+            'icon'     => 'fa-cog',
+            'active'   => 'backend/setting*',
+        ],
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Cấu hình 'app' namespace
@@ -18,11 +30,7 @@ return [
     | 'app' là namespace mặc định nếu không chỉ rỏ sử dụng namespace nào
     |
     */
-    'app'  => [
-        /**
-         * Các section xuất hiện trong trang list setting
-         */
-        'lists'    => ['app', 'display', 'system'],
+    'app'   => [
         /**
          * Dùng validation input, LƯU Ý:
          * - rule required (nếu có) phải đứng ĐẦU hoặc CUỐI

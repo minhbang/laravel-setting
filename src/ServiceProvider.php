@@ -4,7 +4,13 @@ namespace Minhbang\Setting;
 
 use Minhbang\Kit\Extensions\BaseServiceProvider;
 use Illuminate\Foundation\AliasLoader;
+use MenuManager;
 
+/**
+ * Class ServiceProvider
+ *
+ * @package Minhbang\Setting
+ */
 class ServiceProvider extends BaseServiceProvider
 {
     /**
@@ -23,6 +29,8 @@ class ServiceProvider extends BaseServiceProvider
                 __DIR__ . '/../config/setting.php' => config_path('setting.php'),
             ]
         );
+        // Add setting menus
+        MenuManager::addItems(config('setting.menus'));
     }
 
     /**
@@ -42,7 +50,7 @@ class ServiceProvider extends BaseServiceProvider
         );
         // add Setting alias
         $this->app->booting(
-            function ($app) {
+            function () {
                 AliasLoader::getInstance()->alias('Setting', Facade::class);
             }
         );
