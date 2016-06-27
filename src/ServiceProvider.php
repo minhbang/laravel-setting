@@ -2,6 +2,7 @@
 
 namespace Minhbang\Setting;
 
+use Illuminate\Routing\Router;
 use Minhbang\Kit\Extensions\BaseServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 use MenuManager;
@@ -14,11 +15,9 @@ use MenuManager;
 class ServiceProvider extends BaseServiceProvider
 {
     /**
-     * Perform post-registration booting of services.
-     *
-     * @return void
+     * @param \Illuminate\Routing\Router $router
      */
-    public function boot()
+    public function boot(Router $router)
     {
         $this->loadTranslationsFrom(__DIR__ . '/../lang', 'setting');
         $this->loadViewsFrom(__DIR__ . '/../views', 'setting');
@@ -29,6 +28,7 @@ class ServiceProvider extends BaseServiceProvider
                 __DIR__ . '/../config/setting.php' => config_path('setting.php'),
             ]
         );
+        $this->mapWebRoutes($router, __DIR__ . '/routes.php', config('setting.add_route'));
         // Add setting menus
         MenuManager::addItems(config('setting.menus'));
     }
@@ -42,9 +42,10 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/setting.php', 'setting');
         $this->app['setting'] = $this->app->share(
-            function ($app) {
+            function () {
                 return new Setting(
-                    $app['config']['setting.path']
+                    config('setting.path'),
+                    config('setting.zones')
                 );
             }
         );
