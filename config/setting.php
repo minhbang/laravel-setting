@@ -22,13 +22,13 @@ return [
             'icon'     => 'fa-cog',
             'active'   => ['!backend/setting/app/contact*', 'backend/setting/app*'],
         ],
-        'backend.sidebar.setting.contact' => [
+        /*'backend.sidebar.setting.contact' => [
             'priority' => 3,
             'url'      => 'route:backend.setting.show|zone:app,section:contact',
             'label'    => 'trans:setting::app.sections.contact.title',
             'icon'     => 'fa-cog',
             'active'   => 'backend/setting/app/contact*',
-        ],
+        ],*/
     ],
     // Setting zones
     'zones'      => [

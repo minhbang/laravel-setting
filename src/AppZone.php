@@ -56,6 +56,10 @@ class AppZone extends Zone
                     'rule'    => 'required',
                     'default' => '',
                 ],
+                'product_footer'     => [
+                    'rule'    => 'required',
+                    'default' => '',
+                ],
             ],
             'display' => [
                 'image_width_max'     => [

@@ -13,6 +13,7 @@
                     {!! $html->textField('name_short') !!}
                     {!! $html->textField('address') !!}
                     {!! $html->textareaField('header') !!}
+                    {!! $html->textareaField('product_footer') !!}
                 </div>
             </div>
         </div>
