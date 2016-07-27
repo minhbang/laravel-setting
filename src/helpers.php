@@ -2,27 +2,24 @@
 
 if (!function_exists('setting')) {
     /**
-     * Get the specified setting value.
+     * Get / set the specified setting value.
      *
-     * @param  string $key
+     * If an array is passed as the key, we will assume you want to set an array of values.
      *
-     * @param mixed $default
-     *
-     * @return mixed|\Setting
+     * @param  array|string $key
+     * @param  bool $cache
+     * @return mixed
      */
-    function setting($key = null, $default = null)
+    function setting($key = null, $cache = true)
     {
         if (is_null($key)) {
             return app('setting');
-        } else {
-            if (strpos($key, '::') === false) {
-                $zone = 'app';
-            } else {
-                list($zone, $key) = explode('::', $key, 2);
-            }
-            $zone = app('setting')->zone($zone);
-
-            return is_null($zone) ? $default : $zone->get($key, $default);
         }
+
+        if (is_array($key)) {
+            return app('setting')->set($key);
+        }
+
+        return app('setting')->get($key, $cache);
     }
 }

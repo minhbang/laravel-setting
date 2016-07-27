@@ -1,7 +1,5 @@
 <?php
 return [
-    'add_route'  => true,
-    'middleware' => 'role:admin',
     /*
     |--------------------------------------------------------------------------
     | Thư mục lưu các file setting *.json
@@ -11,28 +9,105 @@ return [
     | - Các file setting có sẽ được lưu <path>/<namespace>.json
     |
     */
-    'path'       => storage_path('settings'),
-
-    // Định nghĩa menus cho setting
-    'menus'      => [
-        'backend.sidebar.setting.app'     => [
-            'priority' => 3,
-            'url'      => 'route:backend.setting.index|zone:app',
-            'label'    => 'trans:setting::app.title',
-            'icon'     => 'fa-cog',
-            'active'   => ['!backend/setting/app/contact*', 'backend/setting/app*'],
+    'path' => storage_path('settings'),
+    /*
+    |--------------------------------------------------------------------------
+    | Cấu hình 'app' namespace
+    |--------------------------------------------------------------------------
+    |
+    | 'app' là namespace mặc định nếu không chỉ rỏ sử dụng namespace nào
+    |
+    */
+    'app'  => [
+        /**
+         * Các section xuất hiện trong trang list setting
+         */
+        'lists'    => ['app', 'display', 'system'],
+        /**
+         * Dùng validation input, LƯU Ý:
+         * - rule required (nếu có) phải đứng ĐẦU hoặc CUỐI
+         * - attribute đa ngôn ngữ có tên bắt đầu bằng dấu _ (gạch dưới)
+         */
+        'rules'    => [
+            'app'     => [
+                'name_app'   => 'required|max:40',
+                'name_short' => 'required|max:40',
+                'name_long'  => 'required|max:128',
+                'email'      => 'required|email',
+                'address'    => 'required|max:255',
+                'tel'        => 'required|max:100',
+            ],
+            'display' => [
+                'image_width_max'     => 'required|integer',
+                'image_width_md'      => 'required|integer',
+                'image_height_md'     => 'required|integer',
+                'image_width_sm'      => 'required|integer',
+                'image_height_sm'     => 'required|integer',
+                'summary_limit'       => 'required|integer',
+                'category_page_limit' => 'required|integer',
+            ],
+            'system'  => [
+                'public_files'   => 'required',
+                'max_image_size' => 'required|integer|min:1',
+                'ga_tracking_id' => 'max:100',
+                'fb_app_id'      => 'max:100',
+                'fb_api_ver'     => 'max:100',
+            ],
+            'contact' => [
+                'name'    => 'required|max:100',
+                'email'   => 'required|email',
+                'form'    => 'required',
+                'success' => 'required|max:255',
+            ],
         ],
-        /*'backend.sidebar.setting.contact' => [
-            'priority' => 3,
-            'url'      => 'route:backend.setting.show|zone:app,section:contact',
-            'label'    => 'trans:setting::app.sections.contact.title',
-            'icon'     => 'fa-cog',
-            'active'   => 'backend/setting/app/contact*',
-        ],*/
+        /**
+         * Các giá trị mặc định
+         */
+        'defaults' => [
+            'app'     => [
+                'name_app'   => 'Laravel Portal',
+                'name_short' => 'Laravel App',
+                'name_long'  => 'Laravel Application Boilerplate',
+                'email'      => 'info@domain.com',
+                'address'    => 'HCM, VN',
+                'tel'        => '0123.4567890',
+            ],
+            'display' => [
+                'image_width_max'     => 900,
+                'image_width_md'      => 490,
+                'image_height_md'     => 294,
+                'image_width_sm'      => 110,
+                'image_height_sm'     => 80,
+                'summary_limit'       => 120,
+                'category_page_limit' => 10,
+            ],
+            'system'  => [
+                'minify_html'    => true,
+                'public_files'   => 'upload',
+                'max_image_size' => 6,
+                'ga_tracking_id' => '',
+                'fb_app_id'      => '',
+                'fb_api_ver'     => '',
+            ],
+            'contact' => [
+                'enable'  => false,
+                'name'    => '',
+                'email'   => '',
+                'form'    => '',
+                'success' => '',
+            ],
+        ],
+        /**
+         * Các giá trị khi khởi tạo form (nếu cần), thường dùng cho bool value
+         */
+        'init'     => [
+            'system'  => [
+                'minify_html' => false,
+            ],
+            'contact' => [
+                'enable' => false,
+            ],
+        ],
     ],
-    // Setting zones
-    'zones'      => [
-        'app' => \Minhbang\Setting\AppZone::class,
-    ],
-    'html'       => \Minhbang\Setting\Html::class,
+    // các namespace khác khai báo tiếp theo tương tự như 'app'
 ];

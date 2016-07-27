@@ -2,22 +2,17 @@
 
 namespace Minhbang\Setting;
 
-use Illuminate\Routing\Router;
-use Minhbang\Kit\Extensions\BaseServiceProvider;
+use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Illuminate\Foundation\AliasLoader;
-use MenuManager;
 
-/**
- * Class ServiceProvider
- *
- * @package Minhbang\Setting
- */
 class ServiceProvider extends BaseServiceProvider
 {
     /**
-     * @param \Illuminate\Routing\Router $router
+     * Perform post-registration booting of services.
+     *
+     * @return void
      */
-    public function boot(Router $router)
+    public function boot()
     {
         $this->loadTranslationsFrom(__DIR__ . '/../lang', 'setting');
         $this->loadViewsFrom(__DIR__ . '/../views', 'setting');
@@ -28,9 +23,6 @@ class ServiceProvider extends BaseServiceProvider
                 __DIR__ . '/../config/setting.php' => config_path('setting.php'),
             ]
         );
-        $this->mapWebRoutes($router, __DIR__ . '/routes.php', config('setting.add_route'));
-        // Add setting menus
-        MenuManager::addItems(config('setting.menus'));
     }
 
     /**
@@ -42,16 +34,15 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/setting.php', 'setting');
         $this->app['setting'] = $this->app->share(
-            function () {
+            function ($app) {
                 return new Setting(
-                    config('setting.path'),
-                    config('setting.zones')
+                    $app['config']['setting.path']
                 );
             }
         );
         // add Setting alias
         $this->app->booting(
-            function () {
+            function ($app) {
                 AliasLoader::getInstance()->alias('Setting', Facade::class);
             }
         );
