@@ -8,5 +8,4 @@ return [
     'restore_default_confirm'     => 'Bạn có chắc chắn muốn khôi phục các thiết lập mặc định?',
     'restore_default_success'     => 'Khôi phục thiết lập mặc định thành công',
     'not_found'                   => 'Các thiết lập này không tồn tại!',
-    'unable_show'                 => 'Không thể xem các thiết lập này!',
 ];

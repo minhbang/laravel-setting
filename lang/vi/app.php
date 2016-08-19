@@ -50,7 +50,7 @@ return [
             'special_title' => 'Module Liên hệ',
             'description'   => 'Thiết lập cho module Liên hệ',
             'fields'        => [
-                'enable'       => 'Kích hoạt',
+                'enable'       => 'Trạng thái',
                 'name'         => 'Tiêu đề module',
                 'email'        => 'E-mail tiếp nhận',
                 'form'         => 'Form điền thông tin',

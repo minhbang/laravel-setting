@@ -1,5 +1,6 @@
 <?php namespace Minhbang\Setting;
 
+use Html as HtmlBuilder;
 use Form;
 use Request;
 use Illuminate\Support\ViewErrorBag;
@@ -11,6 +12,10 @@ use Illuminate\Support\ViewErrorBag;
  */
 class Html
 {
+    /**
+     * @var \Minhbang\Setting\Section
+     */
+    protected $section;
     /**
      * @var array
      */
@@ -27,10 +32,63 @@ class Html
      */
     public function __construct(Section $section)
     {
+        $this->section = $section;
         $this->fields = $section->fields();
         $this->errors = Request::session()->get('errors') ?: new ViewErrorBag();
     }
 
+    /**
+     * @return string
+     */
+    public function showFields()
+    {
+        $titles = $this->section->titles;
+        $values = $this->section->values();
+        $types = $this->section->types();
+        $html = '';
+        foreach ($titles as $name => $title) {
+            $value = $values[$name];
+            if ($types[$name] == 'form') {
+                $value = '<div class="form-horizontal">
+                    <div class="form-editor">
+                        <div id="form-editor-preview" class="form-editor-preview form-control"></div>
+                    </div>
+                </div>';
+            } elseif ($types[$name] == 'checkbox') {
+                $value = HtmlBuilder::yesNoLabel($values[$name]);
+            }
+            $html .= "<tr><td>{$title}</td><td>{$value}</td></tr>";
+        }
+
+        return $html;
+    }
+
+    /**
+     * @return string
+     */
+    public function editFields()
+    {
+        $html = '';
+        foreach (array_keys($this->fields) as $name) {
+            $html .= $this->field($name);
+        }
+
+        return $html;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return string
+     */
+    public function field($name)
+    {
+        $options = $this->fields[$name]['options'];
+        $type = mb_array_extract('type', $options);
+
+        return in_array($type, ['text', 'textarea', 'checkbox', 'form']) ?
+            call_user_func_array([$this, "{$type}Field"], [$name, $options]) : null;
+    }
 
     /**
      * @param string $name
@@ -49,7 +107,7 @@ class Html
             $element = "<div class=\"input-group\">$element<span class=\"input-group-addon\">$addon</span></div>";
         }
 
-        return $this->field($name, $element, $label_size, $input_size);
+        return $this->fieldGroup($name, $element, $label_size, $input_size);
     }
 
     /**
@@ -68,7 +126,7 @@ class Html
         $label_size = mb_array_extract('label_size', $options);
         $input_size = mb_array_extract('input_size', $options);
 
-        return $this->field($name, Form::textarea($name, null, $options), $label_size, $input_size);
+        return $this->fieldGroup($name, Form::textarea($name, null, $options), $label_size, $input_size);
     }
 
     /**
@@ -88,7 +146,32 @@ class Html
         $input_size = mb_array_extract('input_size', $options);
         $br = $label_size ? '' : '<br>';
 
-        return $this->field($name, $br . Form::checkbox($name, 1, null, $options), $label_size, $input_size);
+        return $this->fieldGroup($name, $br . Form::checkbox($name, 1, null, $options), $label_size, $input_size);
+    }
+
+    /**
+     * @param $name
+     * @param array $options
+     *
+     * @return string
+     */
+    public function formField($name, $options = [])
+    {
+        $label_size = mb_array_extract('label_size', $options);
+        $input_size = mb_array_extract('input_size', $options);
+        $id = mb_array_extract('id', $options, "input-{$name}");
+        $element = Form::hidden("form", null, ['id' => $id]) . <<<"HTML"
+<div class="form-editor" data-input="#{$id}">
+    <div id="form-editor-preview" class="form-editor-preview form-control"></div>
+    <div class="actions">
+        <a href="#" class="btn btn-xs btn-primary" data-type="text"><i class="fa fa-plus"></i> Text Field</a>
+        <a href="#" class="btn btn-xs btn-success" data-type="textarea"><i class="fa fa-plus"></i> Textarea Field</a>
+        <a href="#" class="btn btn-xs btn-warning" data-type="checkbox"><i class="fa fa-plus"></i> Checkbox</a>
+    </div>
+</div>
+HTML;
+
+        return $this->fieldGroup($name, $element, $label_size, $input_size);
     }
 
     /**
@@ -99,7 +182,7 @@ class Html
      *
      * @return string
      */
-    public function field($name, $element, $label_size = null, $input_size = null)
+    public function fieldGroup($name, $element, $label_size = null, $input_size = null)
     {
         $help = $this->errors->has($name) ?
             $this->errors->first($name) :
@@ -117,11 +200,19 @@ class Html
     /**
      * @param string $cancel_url
      *
+     * @param string $offset_size
+     *
+     * @param string $buttons_size
+     *
      * @return string
      */
-    public function buttons($cancel_url = '#')
+    public function buttons($cancel_url = '#', $offset_size = null, $buttons_size = null)
     {
-        return '<button type="submit" class="btn btn-success" style="margin-right: 15px;">' . trans('common.save') . '</button>
+        $offset_size = $offset_size ?: config('setting.default_field_options.label_size');
+        $buttons_size = $buttons_size ?: config('setting.default_field_options.input_size');
+        $buttons = '<button type="submit" class="btn btn-success" style="margin-right: 15px;">' . trans('common.save') . '</button>
                 <a href="' . $cancel_url . '">' . trans('common.cancel') . '</a>';
+
+        return '<div class="form-group"><div class="' . $offset_size . '"></div><div class="' . $buttons_size . '">' . $buttons . '</div></div>';
     }
 }

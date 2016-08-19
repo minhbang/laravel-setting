@@ -23,19 +23,13 @@ abstract class Zone
      */
     protected $file;
     /**
-     * View namespace
+     * Custom views: ['section'_'view' => 'view name',...]
      *
-     * @var string
+     * @var array
      */
-    protected $views;
+    protected $views = [];
     /**
-     * Translation namespace
-     *
-     * @var string
-     */
-    protected $trans;
-    /**
-     * Những sections hiển thị mục menu riêng
+     * Những sections đặc biệt, hiển thị mục menu riêng
      *
      * @var array
      */
@@ -51,6 +45,14 @@ abstract class Zone
     protected $sections = [];
 
     /**
+     * Tiêu đề của Setting Zone
+     *
+     * @return string
+     */
+    abstract protected function defineTitle();
+
+    /**
+     * Định nghĩa các sections của Zone này
      * 1. Validation input, LƯU Ý:
      * - rule required (nếu có) phải đứng ĐẦU hoặc CUỐI
      * - attribute đa ngôn ngữ có tên bắt đầu bằng dấu _ (gạch dưới)
@@ -68,20 +70,27 @@ abstract class Zone
     public function __construct($name, $file)
     {
         $this->name = $name;
-        $this->title = trans("{$this->trans}title");
+        $this->title = $this->defineTitle();
         $this->file = $file;
-        abort_unless($this->trans || $this->views, 500, 'Setting zone: $views && $trans is empty');
         $this->sections = $this->defineSections();
+
+        foreach ($this->sections as $name => $section) {
+            if (!empty($section['is_special'])) {
+                $this->special_sections[] = $name;
+            }
+        }
     }
 
     /**
-     * List section obj
+     * Danh sách sections Obj, tất cả hay trừ các section đặt biệt
+     *
+     * @param bool $all
      *
      * @return array
      */
-    public function sections()
+    public function sections($all = false)
     {
-        $sections = array_diff(array_keys($this->sections), $this->special_sections);
+        $sections = $all ? $this->sections : array_diff(array_keys($this->sections), $this->special_sections);
 
         return array_map(function ($section) {
             return $this->section($section);
@@ -97,7 +106,7 @@ abstract class Zone
     {
         if ($this->has($name)) {
             if (is_array($this->sections[$name])) {
-                $this->sections[$name] = new Section($name, $this->sections[$name], $this->trans, $this);
+                $this->sections[$name] = new Section($name, $this->sections[$name], $this);
             }
 
             return $this->sections[$name];
@@ -183,11 +192,11 @@ abstract class Zone
     public function restore()
     {
         $defaults = [];
-        foreach ($this->defineSections() as $section => $fields) {
-            if (!$this->isSpecial($section)) {
-                $defaults[$section] = [];
-                foreach ($fields as $field => $config) {
-                    $defaults[$section][$field] = $config['default'];
+        foreach ($this->defineSections() as $name => $section) {
+            if (!$this->isSpecial($name)) {
+                $defaults[$name] = [];
+                foreach ($section['fields'] as $field => $config) {
+                    $defaults[$name][$field] = $config['default'];
                 }
             }
         }
@@ -206,15 +215,16 @@ abstract class Zone
     }
 
     /**
-     * @param string $name
+     * @param string $section
+     * @param string $view
      * @param array $data
      * @param array $mergeData
      *
      * @return \Illuminate\View\View
      */
-    public function view($name, $data = [], $mergeData = [])
+    public function view($section, $view, $data = [], $mergeData = [])
     {
-        return view("{$this->views}$name", $data, $mergeData);
+        return view(array_get($this->views, "{$section}_{$view}", "setting::{$view}"), $data, $mergeData);
     }
 
     /**

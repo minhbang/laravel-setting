@@ -39,7 +39,7 @@ class Controller extends BackendController
     {
         $zone = $this->getZone($zone, $section);
         $section = $zone->section($section);
-        abort_unless($section->is_special, 404, trans('setting::common.unable_show'));
+        $html = $this->newClassInstance(config('setting.html'), $section);
         $this->buildHeading(
             [trans('setting::common.setting'), $section->special_title],
             'wrench',
@@ -58,7 +58,7 @@ class Controller extends BackendController
         $titles = $section->titles;
         $values = $section->values();
 
-        return $zone->view("{$section->name}_show", compact('section', 'titles', 'values'));
+        return $zone->view($section->name, 'show', compact('section', 'html', 'titles', 'values'));
     }
 
     /**
@@ -81,7 +81,7 @@ class Controller extends BackendController
             [$return_url => trans('setting::common.setting'), '#' => $section->special_title]
         );
 
-        return $zone->view($section->name, compact('section', 'html', 'return_url', 'update_url'));
+        return $zone->view($section->name, 'form', compact('section', 'html', 'return_url', 'update_url'));
     }
 
     /**

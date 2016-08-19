@@ -1,6 +1,11 @@
 <?php
 Route::group(
-    ['prefix' => 'backend/setting/{zone}', 'as' => 'backend.setting.', 'namespace' => 'Minhbang\Setting', 'middleware' => config('setting.middleware')],
+    [
+        'prefix'     => config('setting.route_prefix') . '/setting/{zone}',
+        'as'         => 'backend.setting.',
+        'namespace'  => 'Minhbang\Setting',
+        'middleware' => config('setting.middleware'),
+    ],
     function () {
         Route::get('/', ['as' => 'index', 'uses' => 'Controller@index']);
         Route::get('{section}', ['as' => 'show', 'uses' => 'Controller@show']);

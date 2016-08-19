@@ -1,7 +1,8 @@
 <?php
 return [
-    'add_route'  => true,
-    'middleware' => 'role:admin',
+    'add_route'    => true,
+    'route_prefix' => 'backend',
+    'middleware'   => 'role:admin',
     /*
     |--------------------------------------------------------------------------
     | Thư mục lưu các file setting *.json
@@ -11,11 +12,11 @@ return [
     | - Các file setting có sẽ được lưu <path>/<namespace>.json
     |
     */
-    'path'       => storage_path('settings'),
+    'path'         => storage_path('settings'),
 
     // Định nghĩa menus cho setting
-    'menus'      => [
-        'backend.sidebar.setting.app'     => [
+    'menus'        => [
+        'backend.sidebar.setting.app' => [
             'priority' => 3,
             'url'      => 'route:backend.setting.index|zone:app',
             'label'    => 'trans:setting::app.title',
@@ -31,8 +32,15 @@ return [
         ],*/
     ],
     // Setting zones
-    'zones'      => [
+    'zones'        => [
         'app' => \Minhbang\Setting\AppZone::class,
     ],
-    'html'       => \Minhbang\Setting\Html::class,
+
+    'html'         => \Minhbang\Setting\Html::class,
+
+    'default_field_options' => [
+        'type'       => 'text',
+        'label_size' => 'col-md-4',
+        'input_size' => 'col-md-8',
+    ],
 ];

@@ -57,30 +57,28 @@ class Section
      * Section constructor.
      *
      * @param string $name
-     * @param array $fields
-     * @param string $trans
+     * @param array $section
      * @param \Minhbang\Setting\Zone $zone
      */
-    public function __construct($name, $fields, $trans, $zone)
+    public function __construct($name, $section, $zone)
     {
         $this->name = $name;
-        $this->title = trans("{$trans}sections.{$name}.title");
-        $this->description = trans("{$trans}sections.{$name}.description");
-        $this->is_special = $zone->isSpecial($name);
-        $this->special_title = $this->is_special ? trans("{$trans}sections.{$name}.special_title") : $this->title;
+        $this->title = $section['title'];
+        $this->description = $section['description'];
+        $this->is_special = isset($section['is_special']) && $section['is_special'];
+        $this->special_title = isset($section['special_title']) ? $section['special_title'] : $this->title;
         $this->return_url = $this->is_special ?
             route('backend.setting.show', ['zone' => $zone->name, 'section' => $name]) :
             route('backend.setting.index', ['zone' => $zone->name]);
-        foreach ($fields as $field => &$config) {
-            $config['title'] = trans("{$trans}sections.{$name}.fields.{$field}");
-            if (isset($config['hint'])) {
-                $config['hint'] = trans("{$trans}sections.{$name}.fields.{$field}_hint");
-            }
+
+        $default_options = config('setting.default_field_options');
+        foreach ($section['fields'] as $field => &$config) {
+            $config = mb_array_merge(['options' => $default_options], $config);
         }
-        $this->fields = new Collection($fields);
+        $this->fields = new Collection($section['fields']);
+
         $this->zone = $zone;
     }
-
 
     /**
      * @return array
@@ -101,6 +99,14 @@ class Section
     }
 
     /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function types()
+    {
+        return $this->fields->keys()->combine($this->fields->pluck('options.type'));
+    }
+
+    /**
      * @return array
      */
     public function fields()
@@ -116,6 +122,32 @@ class Section
     public function has($field)
     {
         return $this->fields->has($field);
+    }
+
+    /**
+     * Có field dạng form
+     */
+    public function getFormField()
+    {
+        $types = $this->types();
+        foreach ($types as $field => $type) {
+            if ($type == 'form') {
+                return $field;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param string $name
+     * @param string $type
+     *
+     * @return bool
+     */
+    public function fieldIs($name, $type)
+    {
+        return ($field = $this->fields->get($name)) ? ($field['options']['type'] == $type) : false;
     }
 
     /**
