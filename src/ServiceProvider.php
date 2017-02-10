@@ -41,14 +41,12 @@ class ServiceProvider extends BaseServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/setting.php', 'setting');
-        $this->app['setting'] = $this->app->share(
-            function () {
-                return new Setting(
-                    config('setting.path'),
-                    config('setting.zones')
-                );
-            }
-        );
+        $this->app->singleton('setting', function () {
+            return new Setting(
+                config('setting.path'),
+                config('setting.zones')
+            );
+        });
         // add Setting alias
         $this->app->booting(
             function () {
