@@ -6,7 +6,7 @@ use Request;
 use Illuminate\Support\ViewErrorBag;
 
 /**
- * Class Html
+ * Class Presenter
  *
  * @package Minhbang\Setting
  */
@@ -26,7 +26,7 @@ class Html
     protected $errors;
 
     /**
-     * Html constructor.
+     * Presenter constructor.
      *
      * @param \Minhbang\Setting\Section $section
      */

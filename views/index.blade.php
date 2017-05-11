@@ -34,7 +34,7 @@
     </div>
 @stop
 
-@section('script')
+@push('scripts')
     <script type="text/javascript">
         $('#btn-restore-default').click(function (e) {
             var url = $(this).attr('href');
@@ -52,7 +52,7 @@
                 },
                 'callback': function (ok) {
                     if (ok) {
-                        $.post(url, {_token: window.csrf_token}, function (message) {
+                        $.post(url, {_token: window.Laravel.csrfToken}, function (message) {
                             $.fn.mbHelpers.showMessage(
                                     message.type,
                                     message.content,
@@ -70,4 +70,4 @@
             return false;
         });
     </script>
-@stop
+@endpush

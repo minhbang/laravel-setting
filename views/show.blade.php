@@ -11,8 +11,8 @@
         </div>
     </div>
 @stop
-@section('script')
+@push('scripts')
     @if($field = $section->getFormField())
         @include('_form_show_script', ['form' => $values[$field]])
     @endif
-@stop
+@endpush

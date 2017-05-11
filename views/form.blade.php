@@ -14,7 +14,7 @@
     {!! Form::close() !!}
 @stop
 
-@section('script')
+@push('scripts')
     @if($section->getFormField())
         @include('_form_editor_script', ['input_forms' => ['input-form' => 'form-editor-preview']])
     @endif
@@ -23,4 +23,4 @@
             $('.wysiwyg').mbEditor();
         });
     </script>
-@stop
+@endpush
