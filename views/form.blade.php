@@ -1,4 +1,4 @@
-@extends('backend.layouts.master')
+@extends('kit::backend.layouts.master')
 @section('content')
     {!! Form::model($section->values(), ['class' => 'form-horizontal', 'method' => 'post', 'url' => $update_url]) !!}
     <div class="ibox">
@@ -16,7 +16,7 @@
 
 @push('scripts')
     @if($section->getFormField())
-        @include('_form_editor_script', ['input_forms' => ['input-form' => 'form-editor-preview']])
+        @include('kit::_form_editor_script', ['input_forms' => ['input-form' => 'form-editor-preview']])
     @endif
     <script type="text/javascript">
         $(document).ready(function () {

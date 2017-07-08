@@ -1,4 +1,4 @@
-@extends('backend.layouts.master')
+@extends('kit::backend.layouts.master')
 @section('content')
     <div class="ibox">
         <div class="ibox-title">
@@ -13,6 +13,6 @@
 @stop
 @push('scripts')
     @if($field = $section->getFormField())
-        @include('_form_show_script', ['form' => $values[$field]])
+        @include('kit::_form_show_script', ['form' => $values[$field]])
     @endif
 @endpush
