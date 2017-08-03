@@ -30,6 +30,7 @@ return [
                 'image_width_sm' => 'Chiều rộng ảnh nhỏ',
                 'image_width_sm_hint' => 'Ảnh nhỏ thường: hình đại diện tin thường, thumbnail...',
                 'image_height_sm' => 'Chiều cao ảnh nhỏ',
+                'title_limit' => 'Max chiều dài Tiêu đề nội dung',
                 'summary_limit' => 'Max chiều dài Tóm tắc nội dung',
                 'category_page_limit' => 'Số item trên 1 trang Category',
             ],
