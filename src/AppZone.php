@@ -75,7 +75,7 @@ class AppZone extends Zone
                     'image_width_max'     => [
                         'title'   => trans('setting::app.sections.display.fields.image_width_max'),
                         'rule'    => 'required|integer',
-                        'default' => 900,
+                        'default' => 1024,
                         'options' => [
                             'addon' => 'px',
                         ],

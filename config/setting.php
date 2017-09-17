@@ -1,7 +1,7 @@
 <?php
 return [
     'route_prefix' => 'backend',
-    'middleware'   => ['web', 'role:admin'],
+    'middleware'   => ['web', 'role:sys.admin'],
     /*
     |--------------------------------------------------------------------------
     | Thư mục lưu các file setting *.json
