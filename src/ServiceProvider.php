@@ -4,7 +4,6 @@ namespace Minhbang\Setting;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Illuminate\Foundation\AliasLoader;
-use MenuManager;
 
 /**
  * Class ServiceProvider
@@ -26,8 +25,10 @@ class ServiceProvider extends BaseServiceProvider
                 __DIR__ . '/../config/setting.php' => config_path('setting.php'),
             ]
         );
-        // Add setting menus
-        MenuManager::addItems(config('setting.menus'));
+
+        if(app()->isAlias('menu-manager')){
+            app('menu-manager')->addItems(config('setting.menus'));
+        }
     }
 
     /**
