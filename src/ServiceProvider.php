@@ -26,7 +26,7 @@ class ServiceProvider extends BaseServiceProvider
             ]
         );
 
-        if(app()->isAlias('menu-manager')){
+        if(app()->getAlias('menu-manager')){
             app('menu-manager')->addItems(config('setting.menus'));
         }
     }
