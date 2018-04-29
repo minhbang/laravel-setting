@@ -2,7 +2,7 @@
 @section('content')
     <div class="ibox ibox-table">
         <div class="ibox-title">
-            <h5>{{ trans('setting::common.group') }}</h5>
+            <h5>{{ __('Setting group') }}</h5>
         </div>
         <div class="ibox-content">
             <table class="table table-striped table-hover table-list">
@@ -20,12 +20,12 @@
                     <td class="min-width">
                         <a id="btn-restore-default"
                            href="{{ route('backend.setting.restore', ['zone' => $zone->name]) }}" class="btn btn-danger"
-                           data-title="{{trans('setting::common.restore_default')}}"
-                           data-label="{{ trans('common.ok') }}"
-                           data-icon="wrench">{{trans('setting::common.default')}}</a>
+                           data-title="{{__('Restore default')}}"
+                           data-label="{{ __('OK') }}"
+                           data-icon="wrench">{{__('Default')}}</a>
                     </td>
                     <td>
-                        {{ trans('setting::common.restore_default_description') }}
+                        {{ __('Restore default settings') }}
                     </td>
                 </tr>
                 </tbody>
@@ -40,14 +40,14 @@
             var url = $(this).attr('href');
             e.preventDefault();
             bootbox.confirm({
-                title: '<i class="fa fa-reply-all"></i> {{trans("setting::common.restore_default")}}',
-                message: '<h3 class="text-danger text-center">{{trans("setting::common.restore_default_confirm")}}</h3>',
+                title: '<i class="fa fa-reply-all"></i> {{__("Restore default")}}',
+                message: '<h3 class="text-danger text-center">{{__("Are you sure you want to restore the default settings?")}}</h3>',
                 buttons: {
                     cancel: {
-                        label: '{{trans('common.cancel')}}'
+                        label: '{{__('Cancel')}}'
                     },
                     confirm: {
-                        label: '{{trans('common.ok')}}'
+                        label: '{{__('OK')}}'
                     }
                 },
                 'callback': function (ok) {

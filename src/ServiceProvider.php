@@ -15,13 +15,13 @@ class ServiceProvider extends BaseServiceProvider
 
     public function boot()
     {
-        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'setting');
+        //$this->loadTranslationsFrom(__DIR__ . '/../lang', 'setting');
         $this->loadViewsFrom(__DIR__ . '/../views', 'setting');
         $this->loadRoutesFrom(__DIR__ . '/routes.php');
         $this->publishes(
             [
                 __DIR__ . '/../views'              => base_path('resources/views/vendor/setting'),
-                __DIR__ . '/../lang'               => base_path('resources/lang/vendor/setting'),
+                //__DIR__ . '/../lang'               => base_path('resources/lang/vendor/setting'),
                 __DIR__ . '/../config/setting.php' => config_path('setting.php'),
             ]
         );

@@ -7,7 +7,7 @@ class AppZone extends Zone
      */
     protected function defineTitle()
     {
-        return trans('setting::app.title');
+        return __('General');
     }
 
     /**
@@ -17,41 +17,41 @@ class AppZone extends Zone
     {
         return [
             'website' => [
-                'title'       => trans('setting::app.sections.website.title'),
-                'description' => trans('setting::app.sections.website.description'),
+                'title'       => __('Website'),
+                'description' => __('Website settings'),
                 'fields'      => [
                     'name_app'       => [
-                        'title'   => trans('setting::app.sections.website.fields.name_app'),
+                        'title'   => __('App name'),
                         'rule'    => 'required|max:40',
                         'default' => 'Laravel Portal',
                     ],
                     'name_short'     => [
-                        'title'   => trans('setting::app.sections.website.fields.name_short'),
+                        'title'   => __('Site short name'),
                         'rule'    => 'required|max:40',
                         'default' => 'Laravel App',
                     ],
                     'name_long'      => [
-                        'title'   => trans('setting::app.sections.website.fields.name_long'),
+                        'title'   => __('Sitename'),
                         'rule'    => 'required|max:128',
                         'default' => 'Laravel Application Boilerplate',
                     ],
                     'email'          => [
-                        'title'   => trans('setting::app.sections.website.fields.email'),
+                        'title'   => __('E-mail'),
                         'rule'    => 'required|email',
                         'default' => 'info@domain.com',
                     ],
                     'address'        => [
-                        'title'   => trans('setting::app.sections.website.fields.address'),
+                        'title'   => __('Address'),
                         'rule'    => 'required|max:255',
                         'default' => 'HCM, VN',
                     ],
                     'tel'            => [
-                        'title'   => trans('setting::app.sections.website.fields.tel'),
+                        'title'   => __('Phone number'),
                         'rule'    => 'required|max:100',
                         'default' => '0123.4567890',
                     ],
                     'header'         => [
-                        'title'   => trans('setting::app.sections.website.fields.header'),
+                        'title'   => __('Header content'),
                         'rule'    => 'required',
                         'default' => '',
                         'options' => [
@@ -59,7 +59,7 @@ class AppZone extends Zone
                         ],
                     ],
                     'product_footer' => [
-                        'title'   => trans('setting::app.sections.website.fields.product_footer'),
+                        'title'   => __('More information when viewing products'),
                         'rule'    => 'required',
                         'default' => '',
                         'options' => [
@@ -69,11 +69,11 @@ class AppZone extends Zone
                 ],
             ],
             'display' => [
-                'title'       => trans('setting::app.sections.display.title'),
-                'description' => trans('setting::app.sections.display.description'),
+                'title'       => __('Display'),
+                'description' => __('Display settings'),
                 'fields'       => [
                     'image_width_max'     => [
-                        'title'   => trans('setting::app.sections.display.fields.image_width_max'),
+                        'title'   => __('Max image width'),
                         'rule'    => 'required|integer',
                         'default' => 1024,
                         'options' => [
@@ -81,7 +81,7 @@ class AppZone extends Zone
                         ],
                     ],
                     'image_width_md'      => [
-                        'title'   => trans('setting::app.sections.display.fields.image_width_md'),
+                        'title'   => __('Medium image width'),
                         'rule'    => 'required|integer',
                         'default' => 490,
                         'options' => [
@@ -89,7 +89,7 @@ class AppZone extends Zone
                         ],
                     ],
                     'image_height_md'     => [
-                        'title'   => trans('setting::app.sections.display.fields.image_height_md'),
+                        'title'   => __('Medium image height'),
                         'rule'    => 'required|integer',
                         'default' => 294,
                         'options' => [
@@ -97,7 +97,7 @@ class AppZone extends Zone
                         ],
                     ],
                     'image_width_sm'      => [
-                        'title'   => trans('setting::app.sections.display.fields.image_width_sm'),
+                        'title'   => __('Small image width'),
                         'rule'    => 'required|integer',
                         'default' => 110,
                         'options' => [
@@ -105,7 +105,7 @@ class AppZone extends Zone
                         ],
                     ],
                     'image_height_sm'     => [
-                        'title'   => trans('setting::app.sections.display.fields.image_height_sm'),
+                        'title'   => __('Small image height'),
                         'rule'    => 'required|integer',
                         'default' => 80,
                         'options' => [
@@ -113,23 +113,23 @@ class AppZone extends Zone
                         ],
                     ],
                     'summary_limit'       => [
-                        'title'   => trans('setting::app.sections.display.fields.summary_limit'),
+                        'title'   => __('Content summary limit'),
                         'rule'    => 'required|integer',
                         'default' => 120,
                     ],
                     'category_page_limit' => [
-                        'title'   => trans('setting::app.sections.display.fields.category_page_limit'),
+                        'title'   => __('Item per Category page'),
                         'rule'    => 'required|integer',
                         'default' => 10,
                     ],
                 ],
             ],
             'system'  => [
-                'title'       => trans('setting::app.sections.system.title'),
-                'description' => trans('setting::app.sections.system.description'),
+                'title'       => __('System'),
+                'description' => __('System settings'),
                 'fields'       => [
                     'minify_html'    => [
-                        'title'   => trans('setting::app.sections.system.fields.minify_html'),
+                        'title'   => __('Minify HTML output'),
                         'rule'    => 'integer',
                         'default' => true,
                         'init'    => false,
@@ -141,8 +141,8 @@ class AppZone extends Zone
                         ],
                     ],
                     'public_files'   => [
-                        'title'   => trans('setting::app.sections.system.fields.public_files'),
-                        'hint'    => trans('setting::app.sections.system.fields.public_files_hint'),
+                        'title'   => __('Upload directory'),
+                        'hint'    => __('Relatively from public_path'),
                         'rule'    => 'required',
                         'default' => 'upload',
                         'filter'  => function ($value) {
@@ -150,7 +150,7 @@ class AppZone extends Zone
                         },
                     ],
                     'max_image_size' => [
-                        'title'   => trans('setting::app.sections.system.fields.max_image_size'),
+                        'title'   => __('Max image file size'),
                         'rule'    => 'required|integer|min:1',
                         'default' => 6,
                         'options' => [
@@ -158,30 +158,30 @@ class AppZone extends Zone
                         ],
                     ],
                     'ga_tracking_id' => [
-                        'title'   => trans('setting::app.sections.system.fields.ga_tracking_id'),
+                        'title'   => __('Google Analytics Tracking ID'),
                         'rule'    => 'max:100',
                         'default' => '',
                     ],
                     'fb_app_id'      => [
-                        'title'   => trans('setting::app.sections.system.fields.fb_app_id'),
+                        'title'   => __('Facebook Application ID'),
                         'rule'    => 'max:100',
                         'default' => '',
                     ],
                     'fb_api_ver'     => [
-                        'title'   => trans('setting::app.sections.system.fields.fb_api_ver'),
+                        'title'   => __('Facebook API version'),
                         'rule'    => 'max:100',
                         'default' => '',
                     ],
                 ],
             ],
             'contact' => [
-                'title'         => trans('setting::app.sections.contact.title'),
-                'description'   => trans('setting::app.sections.contact.description'),
+                'title'         => __('Contact'),
+                'description'   => __('Contact module settings'),
                 'is_special'    => true,
-                'special_title' => trans('setting::app.sections.contact.special_title'),
+                'special_title' => __('Contact module'),
                 'fields'        => [
                     'enable'  => [
-                        'title'   => trans('setting::app.sections.contact.fields.enable'),
+                        'title'   => __('Status'),
                         'rule'    => 'integer',
                         'default' => false,
                         'init'    => false,
@@ -190,17 +190,17 @@ class AppZone extends Zone
                         ],
                     ],
                     'name'    => [
-                        'title'   => trans('setting::app.sections.contact.fields.name'),
+                        'title'   => __('Module title'),
                         'rule'    => 'required|max:100',
                         'default' => '',
                     ],
                     'email'   => [
-                        'title'   => trans('setting::app.sections.contact.fields.email'),
+                        'title'   => __('E-mail reception'),
                         'rule'    => 'required|email',
                         'default' => '',
                     ],
                     'form'    => [
-                        'title'   => trans('setting::app.sections.contact.fields.form'),
+                        'title'   => __('Contact form'),
                         'rule'    => 'required',
                         'default' => '',
                         'options' => [
@@ -208,8 +208,8 @@ class AppZone extends Zone
                         ],
                     ],
                     'success' => [
-                        'title'   => trans('setting::app.sections.contact.fields.success'),
-                        'hint'    => trans('setting::app.sections.contact.fields.success_hint'),
+                        'title'   => __('Success message'),
+                        'hint'    => __('Show when contact information is successfully sent'),
                         'rule'    => 'required|max:255',
                         'default' => '',
                         'options' => [

@@ -139,8 +139,8 @@ class Html
     {
         $options = $options + [
                 'class'         => 'switch',
-                'data-on-text'  => trans('common.yes'),
-                'data-off-text' => trans('common.no'),
+                'data-on-text'  => __('Yes'),
+                'data-off-text' => __('No'),
             ];
         $label_size = mb_array_extract('label_size', $options);
         $input_size = mb_array_extract('input_size', $options);
@@ -210,8 +210,8 @@ HTML;
     {
         $offset_size = $offset_size ?: config('setting.default_field_options.label_size');
         $buttons_size = $buttons_size ?: config('setting.default_field_options.input_size');
-        $buttons = '<button type="submit" class="btn btn-success" style="margin-right: 15px;">' . trans('common.save') . '</button>
-                <a href="' . $cancel_url . '">' . trans('common.cancel') . '</a>';
+        $buttons = '<button type="submit" class="btn btn-success" style="margin-right: 15px;">' . __('Save') . '</button>
+                <a href="' . $cancel_url . '">' . __('Cancel') . '</a>';
 
         return '<div class="form-group"><div class="' . $offset_size . '"></div><div class="' . $buttons_size . '">' . $buttons . '</div></div>';
     }

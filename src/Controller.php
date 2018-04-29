@@ -21,9 +21,9 @@ class Controller extends BackendController
     {
         $zone = $this->getZone($zone);
         $this->buildHeading(
-            [trans('setting::common.setting'), $zone->title],
+            [__('Setting'), $zone->title],
             'wrench',
-            trans('setting::common.setting')
+            __('Setting')
         );
 
         return view('setting::index', compact('zone'));
@@ -41,16 +41,16 @@ class Controller extends BackendController
         $section = $zone->section($section);
         $html = $this->newClassInstance(config('setting.html'), $section);
         $this->buildHeading(
-            [trans('setting::common.setting'), $section->special_title],
+            [__('Setting'), $section->special_title],
             'wrench',
             [
-                route('backend.setting.index', ['zone' => $zone->name]) => trans('setting::common.setting'),
+                route('backend.setting.index', ['zone' => $zone->name]) => __('Setting'),
                 '#'                                                     => $section->special_title,
             ],
             [
                 [
                     route('backend.setting.edit', ['zone' => $zone->name, 'section' => $section->name]),
-                    trans('common.update'),
+                    __('Update'),
                     ['type' => 'primary', 'size' => 'sm', 'icon' => 'pencil'],
                 ],
             ]
@@ -76,9 +76,9 @@ class Controller extends BackendController
         $update_url = route('backend.setting.update', ['zone' => $zone->name, 'section' => $section->name]);
 
         $this->buildHeading(
-            [trans('setting::common.setting') . " {$zone->title}:", $section->special_title],
+            [__('Setting') . " {$zone->title}:", $section->special_title],
             'wrench',
-            [$return_url => trans('setting::common.setting'), '#' => $section->special_title]
+            [$return_url => __('Setting'), '#' => $section->special_title]
         );
 
         return $zone->view($section->name, 'form', compact('section', 'html', 'return_url', 'update_url'));
@@ -101,7 +101,7 @@ class Controller extends BackendController
             'message',
             [
                 'type'    => 'success',
-                'content' => trans('common.save_object_success', ['name' => trans('setting::common.setting')]),
+                'content' => __('Save <strong>:name</strong> success', ['name' => __('Setting')]),
             ]
         );
         $return_url = $request->has('_return');
@@ -124,7 +124,7 @@ class Controller extends BackendController
         return response()->json(
             [
                 'type'    => 'success',
-                'content' => trans('setting::common.restore_default_success'),
+                'content' => __('Restore default settings successfully'),
             ]
         );
     }
@@ -141,7 +141,7 @@ class Controller extends BackendController
         if ($ok && $section) {
             $ok = $zone->has($section);
         }
-        abort_unless($ok, 404, trans('setting::common.not_found'));
+        abort_unless($ok, 404, __('Section not found!'));
 
         return $zone;
     }

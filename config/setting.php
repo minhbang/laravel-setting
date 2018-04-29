@@ -18,14 +18,14 @@ return [
         'backend.sidebar.setting.app' => [
             'priority' => 3,
             'url'      => 'route:backend.setting.index|zone:app',
-            'label'    => 'trans:setting::app.title',
+            'label'    => '__:General',
             'icon'     => 'fa-cog',
             'active'   => ['!backend/setting/app/contact*', 'backend/setting/app*'],
         ],
         /*'backend.sidebar.setting.contact' => [
             'priority' => 3,
             'url'      => 'route:backend.setting.show|zone:app,section:contact',
-            'label'    => 'trans:setting::app.sections.contact.title',
+            'label'    => '__:Contact',
             'icon'     => 'fa-cog',
             'active'   => 'backend/setting/app/contact*',
         ],*/
